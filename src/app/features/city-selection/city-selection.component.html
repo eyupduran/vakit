@@ -1,0 +1,48 @@
+<div class="page-container">
+  <div class="city-selection">
+    <h2>Şehir/İlçe Arama</h2>
+    <div class="search-container">
+      <div class="search-input-wrapper">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search search-icon"></i>
+          <input 
+            type="text" 
+            pInputText 
+            [(ngModel)]="searchQuery" 
+            (ngModelChange)="onSearchChange($event)"
+            placeholder="Şehir veya ilçe adı giriniz..." 
+            class="search-input"/>
+        </span>
+      </div>
+    </div>
+
+    <div *ngIf="loading$ | async" class="text-center mt-4">
+      <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+    </div>
+
+    <div *ngIf="searchResults.length > 0" class="search-results">
+      <div class="search-list">
+        <div *ngFor="let place of searchResults; trackBy: trackByPlaceId" 
+            class="search-item" 
+            (click)="onPlaceSelect(place)">
+          <div class="place-icon">
+            <i class="pi pi-map-marker"></i>
+          </div>
+          <div class="place-info">
+            <div class="place-name">{{place.name}}</div>
+            <div class="place-details">
+              <span class="state-name">
+                <i class="pi pi-building"></i>
+                {{place.stateName}}
+              </span>
+              <span class="country-name">
+                <i class="pi pi-flag"></i>
+                {{place.country}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

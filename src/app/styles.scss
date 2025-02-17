@@ -1,0 +1,19 @@
+:root {
+  --primary-color: #6366F1;
+  --primary-color-rgb: 99, 102, 241;
+  --text-color: #495057;
+  --text-color-secondary: #6c757d;
+  --surface-ground: #f8f9fa;
+  --surface-border: #dee2e6;
+  --card-background: #ffffff;
+}
+
+:root.dark-theme {
+  --primary-color: #938AFF;
+  --primary-color-rgb: 147, 138, 255;
+  --text-color: #e9ecef;
+  --text-color-secondary: #adb5bd;
+  --surface-ground: #2b2b2b;
+  --surface-border: #404040;
+  --card-background: #1e1e1e;
+}
