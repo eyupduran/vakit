@@ -30,7 +30,7 @@ export class PrayerTimesComponent implements OnInit {
     };
     progress: number;
   } | null = null;
-  activeTabIndex = 0;
+  activeTabIndex = 1; // Set initial tab index to 1 (today) since we now have yesterday's data
   private destroy$ = new Subject<void>();
 
   prayerTimes$ = this.selectedPlace$.pipe(
@@ -59,8 +59,7 @@ export class PrayerTimesComponent implements OnInit {
       const dates = Object.keys(times.times);
       const todayIndex = dates.findIndex(date => this.isToday(new Date(date)));
       if (todayIndex !== -1) {
-        // Tab indeksi olarak 1 ayarlayalım (dün:0, bugün:1, yarın:2)
-        this.activeTabIndex = 1;
+        this.activeTabIndex = todayIndex;
       }
 
       // İlk yüklemede sayacı başlat ve daha sık güncelle
@@ -201,22 +200,25 @@ export class PrayerTimesComponent implements OnInit {
   getPrayerIcon(prayerName: string): string {
     switch (prayerName) {
       case 'İmsak':
-        return 'fas fa-moon';
+        return 'fas fa-cloud-moon'; // Gece bulutlu
       case 'Güneş':
-        return 'fas fa-sun';
+        return 'fas fa-sun'; // Sabah güneşi
       case 'Öğle':
-        return 'fas fa-sun';
+        return 'fas fa-sun'; // Öğlen güneşi
       case 'İkindi':
-        return 'fas fa-cloud-sun';
+        return 'fas fa-cloud-sun'; // Kısmen güneşli
       case 'Akşam':
-        return 'fas fa-cloud-moon';  // Akşam vakti için yeni ikon
+        return 'fas fa-cloud-moon'; // Gün batımı
       case 'Yatsı':
-        return 'fas fa-star';
+        return 'fas fa-moon'; // Gece
       default:
-        return 'fas fa-clock';
+        return 'fas fa-clock'; // Varsayılan ikon
     }
   }
-
+  
+  formatPrayerName(prayerName: string): string {
+    return prayerName.replace('İ', 'İ').toUpperCase();
+  }
   getNextPrayerText(): string {
     if (!this.nextPrayerTime) return '';
     
@@ -230,5 +232,21 @@ export class PrayerTimesComponent implements OnInit {
     };
 
     return prayers[this.nextPrayerTime.name as keyof typeof prayers];
+  }
+
+  getCurrentDate(): string {
+    return new Intl.DateTimeFormat('tr-TR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }).format(new Date());
+  }
+
+  getHijriDate(): string {
+    return new Intl.DateTimeFormat('tr-TR-u-ca-islamic', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }).format(new Date());
   }
 }

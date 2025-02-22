@@ -11,20 +11,40 @@ import { ThemeService } from '../../core/services/theme.service';
   `,
   styles: [`
     .theme-toggle {
-      background: transparent;
+      background: rgba(var(--primary-color-rgb), 0.1);
       border: none;
       cursor: pointer;
       padding: 8px;
       border-radius: 50%;
-      transition: background-color 0.3s;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin-left: 4px;
     }
     
     .theme-toggle:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+      background: rgba(var(--primary-color-rgb), 0.15);
+      transform: translateY(-1px);
     }
 
     .pi {
-      font-size: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      .theme-toggle {
+        width: 28px;
+        height: 28px;
+        padding: 6px;
+      }
+      
+      .pi {
+        font-size: 1rem;
+      }
     }
   `],
   standalone: true,

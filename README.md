@@ -1,4 +1,4 @@
-# Vakit
+# Vakitname
 
 Bu proje, [Namaz Vakti API](https://github.com/canbax/namaz-vakti-api) kullanılarak ve VS Code Agent ile oluşturulmuş bir namaz vakti uygulamasıdır.
 
@@ -7,7 +7,7 @@ Bu proje, [Namaz Vakti API](https://github.com/canbax/namaz-vakti-api) kullanıl
 1. Depoyu klonlayın:
    ```sh
    git clone <repo-url>
-   cd vakit
+   cd Vakitname
    ```
 2. Bağımlılıkları yükleyin:
    ```sh
@@ -25,14 +25,9 @@ Bu proje, namaz vakitlerini almak için [Canbax](https://github.com/canbax)'ın 
 
 ## Görseller
 
-## Görseller
-
-Projeden bazı ekran görüntüleri:
+Projeden bazı ekran görüntüler:
 
 <div style="display: flex; gap: 10px;">
-  <img src="readme-image/mobil1.png" alt="Mobil Görsel 1" style="width: 48%;"/>
-  <img src="readme-image/mobil2.png" alt="Mobil Görsel 2" style="width: 48%;"/>
+  <img src="readme-image/2.jpg" alt="Mobil Görsel 2" style="width: 48%;"/>
+  <img src="readme-image/1.jpg" alt="Mobil Görsel 1" style="width: 48%;"/>
 </div>
-
-Namaz Vakti API'yi sağladığı için [Canbax](https://github.com/canbax)'a teşekkür ederiz!
-

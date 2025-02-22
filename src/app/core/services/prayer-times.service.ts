@@ -13,12 +13,11 @@ export class PrayerTimesService {
 
   getPrayerTimes(placeId: number): Observable<PrayerTimes> {
     const today = new Date();
-    // Get 2 days before today
-    const startDate = new Date(today);
-    startDate.setDate(today.getDate() - 2);
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
     
     return this.http.get<PrayerTimes>(
-      `${this.apiBaseUrl}/timesForPlace?id=${placeId}&date=${startDate.toISOString().split('T')[0]}&days=5&timezoneOffset=180&calculationMethod=Turkey`
+      `${this.apiBaseUrl}/timesForPlace?id=${placeId}&date=${yesterday.toISOString().split('T')[0]}&days=4&timezoneOffset=180&calculationMethod=Turkey`
     );
   }
 }

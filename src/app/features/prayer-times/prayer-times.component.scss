@@ -1,15 +1,20 @@
 .prayer-page {
   width: 100%;
-  min-height: calc(100vh - 180px);
+  min-height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
-  padding: 1.5rem 1rem;
+  padding: 1rem;
   background-color: var(--background-color);
+  overflow: hidden;
 }
 
 .prayer-container {
   width: 100%;
   max-width: 700px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .location-info {
@@ -52,16 +57,29 @@
 
 :host ::ng-deep {
   .prayer-tabs {
+    .p-tabview-nav-container {
+      position: relative;
+      padding: 0.5rem;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .p-tabview-nav-content {
+      background: transparent;
+      border-radius: 8px;
+      padding: 0;
+      border: none;
+    }
+
     .p-tabview-nav {
       justify-content: center;
       border: none;
-      margin-bottom: 1rem;
       gap: 0.5rem;
       flex-wrap: nowrap;
       overflow-x: auto;
-      padding-bottom: 0.5rem;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+      padding: 0;
+      background: transparent;
 
       &::-webkit-scrollbar {
         display: none;
@@ -69,43 +87,60 @@
 
       li {
         flex: 1;
-        max-width: 180px;
-        min-width: 100px;
+        max-width: 140px;
+        min-width: 110px;
+        text-align: center;
 
         .p-tabview-nav-link {
+          background: var(--surface-card);
+          color: var(--text-color);
+          border-top-width: 2px;
+          border-radius: 8px;
+          padding: 0.75rem 0.5rem;
+          font-weight: 500;
+          font-size: 0.95rem;
+          margin: 0;
+          height: 100%;
+          white-space: nowrap;
+          box-shadow: none;
+          display: flex;
+          align-items: center;
           justify-content: center;
-          text-align: center;
-          width: 100%;
+          transition: none !important;
+          transform: none !important;
+          
+          &, &::before, &::after, * {
+            transition: none !important;
+            transform: none;
+          }
+
+          &:not(.p-highlight):hover {
+            background: rgba(239, 75, 0, 0.08);
+            border-color: #ef4b00;
+          }
+
+          &.p-highlight {
+            background: #ef4b00;
+            color: #ffffff;
+            border: 2px solid #ef4b00;
+            border-top-width: 2px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(239, 75, 0, 0.2);
+          }
+
+          &:focus {
+            box-shadow: none;
+          }
         }
-      }
-    }
 
-    .p-tabview-nav-link {
-      padding: 0.5rem 0.75rem;
-      font-weight: 600;
-      border-radius: 8px;
-      margin: 0;
-      transition: all 0.3s ease;
-      font-size: 0.95rem;
-      white-space: nowrap;
-
-      &:not(.p-highlight):hover {
-        background: var(--surface-hover);
-        border-color: var(--surface-border);
-        transform: translateY(-2px);
+        .p-tabview-title, .p-tabview-nav-icon {
+          transition: none !important;
+        }
       }
     }
 
     .p-tabview-panels {
       padding: 0;
-    }
-
-    .p-tabview-selected {
-      .p-tabview-nav-link {
-        background: var(--primary-color) !important;
-        color: white !important;
-        border-color: var(--primary-color) !important;
-      }
     }
   }
 }
@@ -114,7 +149,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
-  padding: 0.25rem;
+  padding: 0.5rem;
   margin: 0 auto;
 }
 
@@ -125,50 +160,93 @@
 
 .prayer-card {
   background: var(--card-background);
-  border-radius: 6px;
-  padding: 0.5rem;
+  border-radius: 12px;
+  padding: 1rem 0.75rem;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
   transition: all 0.3s ease;
   border: 1px solid var(--surface-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-align: center;
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  &:nth-child(2n) .prayer-icon i {
+    animation-delay: 0.6s;
+  }
+
+  &:nth-child(3n) .prayer-icon i {
+    animation-delay: 1.2s;
+  }
+
+  &:nth-child(4n) .prayer-icon i {
+    animation-delay: 0.3s;
+  }
+
+  &:nth-child(5n) .prayer-icon i {
+    animation-delay: 0.9s;
+  }
+
+  &:nth-child(6n) .prayer-icon i {
+    animation-delay: 1.5s;
   }
 
   .prayer-icon {
-    width: 32px;
-    height: 32px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--primary-color);
-    border-radius: 6px;
+    background: #ef4b00;
+    border-radius: 10px;
+    margin-bottom: 0.25rem;
+    box-shadow: 0 4px 8px rgba(239, 75, 0, 0.2);
     
     i {
-      font-size: 1rem;
+      font-size: 1.25rem;
       color: white;
+      animation: floating 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+      will-change: transform;
     }
   }
 
   .prayer-info {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
 
     h3 {
       margin: 0;
       color: var(--text-color);
-      font-size: 0.8rem;
+      font-size: 1.5rem;
       font-weight: 500;
+      opacity: 0.9;
+      text-transform: uppercase;
     }
 
     .time {
-      margin: 0.1rem 0 0;
-      font-size: 0.9rem;
-      font-weight: 600;
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
       color: var(--primary-color);
+      font-variant-numeric: tabular-nums;
+    }
+  }
+}
+
+:root.dark-theme {
+  .prayer-card {
+    &:hover .prayer-icon {
+      background: linear-gradient(135deg, #FF4500, #FF8C00) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4) !important;
+      transition: all 0.3s ease;
     }
   }
 }
@@ -184,34 +262,44 @@
   margin-left: auto;
   margin-right: auto;
 
+  .text-center {
+    text-align: center;
+  }
+
   .next-prayer-title {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 0.75rem;
     padding-bottom: 0.5rem;
-    margin-bottom: 0.75rem;
-    border-bottom: 2px solid var(--surface-border);
+    margin-bottom: 1.5rem;
+    border-bottom: none;
 
-    i {
-      color: var(--primary-color);
-      font-size: 1rem;
-      animation: pulse 2s infinite;
+    .title-text {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text-color);
+      opacity: 0.8;
     }
 
-    span {
-      color: var(--text-color);
-      font-size: 0.9rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .prayer-info-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      i {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        animation: next-prayer-float 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+        will-change: transform;
+        filter: drop-shadow(0 0 5px rgba(var(--primary-color-rgb), 0.4));
+      }
     }
   }
 
   .countdown-container {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
   }
 
   .prayer-header {
@@ -238,6 +326,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-shadow: 0 2px 4px rgba(var(--primary-color-rgb), 0.1);
+        background-clip: text;
       }
     }
 
@@ -301,36 +390,12 @@
     gap: 0.75rem;
     padding: 0.75rem;
     border-radius: 16px;
-    background: rgba(var(--surface-card), 0.8);
-    border: 1px solid rgba(var(--primary-color-rgb), 0.2);
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    border: none;
+    box-shadow: none;
 
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      background: linear-gradient(135deg, 
-        rgba(var(--primary-color-rgb), 0.05),
-        rgba(var(--secondary-color-rgb), 0.05)
-      );
-      pointer-events: none;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      padding: 1px;
-      background: linear-gradient(135deg, 
-        rgba(var(--primary-color-rgb), 0.2),
-        rgba(var(--secondary-color-rgb), 0.2)
-      );
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
+    &::after, &::before {
+      display: none;
     }
 
     .time-unit {
@@ -338,53 +403,65 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-width: 70px;
-      padding: 0.75rem 0.5rem;
-      border-radius: 12px;
+      min-width: 60px;
+      padding: 0.5rem;
+      border-radius: 8px;
       transition: all 0.3s ease;
-      // background: #262626; // Sabit arka plan rengi
-      border: 1px solid rgba(var(--primary-color-rgb), 0.15);
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+      border: none;
+      box-shadow: none;
+      background: transparent;
 
       &:hover {
-        transform: translateY(-2px);
-        background: var(--primary-color);
-        border-color: transparent;
+        transform: none;
+        background: transparent;
 
-        .value, .label {
-          color: white;
+        .value {
+          color: var(--primary-color);
         }
       }
 
       .value {
-        font-size: 2rem;
+        font-size: 2.8rem;  // Ana saat ve dakika değerleri için biraz daha büyük
         font-weight: 700;
-        color: var(--primary-color);
+        color: var(--text-color);
         line-height: 1;
         font-variant-numeric: tabular-nums;
         transition: all 0.3s ease;
-        text-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.4);
       }
 
       .label {
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: var(--primary-color);
-        margin-top: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: all 0.3s ease;
-        opacity: 0.9;
+        display: none;
       }
     }
 
     .separator {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      margin-top: -0.5rem;
+      font-size: 2.2rem;  // Ayraçları da biraz büyüttüm
+      color: var(--text-color);
+      margin-top: 0;
+      opacity: 0.3;
+    }
+
+    .seconds {
+      transform: scale(0.85);  // Sadece boyut küçültme kalıyor, opaklık kaldırıldı
+      
+      .value {
+        font-size: 2.4rem;  // Saniyeler için özel boyut
+      }
+    }
+  }
+
+  .prayer-date {
+    margin-top: 1rem;
+    color: var(--text-color);
+    font-size: 0.85rem;
+
+    .separator {
+      margin: 0 0.35rem;
       opacity: 0.4;
-      text-shadow: 0 0 10px rgba(var(--primary-color-rgb), 0.2);
+    }
+
+    .date, .hijri {
+      opacity: 0.6;
     }
   }
 }
@@ -416,6 +493,89 @@
   }
 }
 
+@keyframes gentle-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes soft-glow {
+  0% {
+    filter: drop-shadow(0 0 3px rgba(var(--primary-color-rgb), 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 5px rgba(var(--primary-color-rgb), 0.5));
+  }
+  100% {
+    filter: drop-shadow(0 0 3px rgba(var(--primary-color-rgb), 0.3));
+  }
+}
+
+@keyframes floating {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-2px); }
+  75% { transform: translateY(1px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes rotate-icon {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes next-prayer-icon {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 3px rgba(var(--primary-color-rgb), 0.3));
+  }
+  25% {
+    transform: scale(1.1) rotate(15deg);
+    filter: drop-shadow(0 0 8px rgba(var(--primary-color-rgb), 0.5));
+  }
+  50% {
+    transform: scale(1.15) rotate(0deg);
+    filter: drop-shadow(0 0 12px rgba(var(--primary-color-rgb), 0.6));
+  }
+  75% {
+    transform: scale(1.1) rotate(-15deg);
+    filter: drop-shadow(0 0 8px rgba(var(--primary-color-rgb), 0.5));
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 3px rgba(var(--primary-color-rgb), 0.3));
+  }
+}
+
+@keyframes next-prayer-float {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-2px); }
+  75% { transform: translateY(1px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes next-prayer-float {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-2px); }
+  75% { transform: translateY(1px); }
+  100% { transform: translateY(0); }
+}
+
 .back-button {
   margin-top: 1.5rem;
   text-align: center;
@@ -430,7 +590,20 @@
 
 @media (max-width: 768px) {
   .prayer-page {
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
+    min-height: 100vh;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .prayer-container {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .location-info h2 {
@@ -438,24 +611,59 @@
   }
 
   .prayer-cards {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+    grid-template-columns: repeat(2,1fr);
+    padding: 0.25rem;
+  }
+
+  .prayer-card {
+    padding: 0.5rem;
+    gap: 3px;
+
+    .prayer-icon {
+      width: 32px;
+      height: 32px;
+      background: #ef4b00;
+      box-shadow: 0 4px 8px rgba(239, 75, 0, 0.2);
+
+      i {
+        font-size: 1rem;
+      }
+    }
+
+    .prayer-info {
+      h3 {
+        font-size: 1rem;
+      }
+
+      .time {
+        font-size: 1rem;
+      }
+    }
   }
 
   .next-prayer-info {
     padding: 0.75rem;
     border-radius: 12px;
-
+    width: 95%;
     .next-prayer-title {
       padding-bottom: 0.5rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0rem;
+      gap: 0.5rem;
 
-      i {
-        font-size: 1rem;
+      .title-text {
+        font-size: 1.1rem;
       }
 
-      span {
-        font-size: 0.9rem;
+      .prayer-info-row {
+        gap: 0.4rem;
+
+        i {
+          font-size: 1.1rem;
+        }
+
+        .prayer-name {
+          font-size: 1rem;
+        }
       }
     }
 
@@ -483,17 +691,21 @@
       gap: 0.5rem;
 
       .time-unit {
-        min-width: 60px;
+        min-width: 30px;
         padding: 0.25rem;
 
         .value {
-          font-size: 1.5rem;
+          font-size: 2.5rem;  // Mobile uyumlu boyutlar
         }
 
         .label {
           font-size: 0.75rem;
           margin-top: 0.25rem;
         }
+      }
+
+      .seconds .value {
+        font-size: 1.6rem;  // Mobile uyumlu saniye boyutu
       }
 
       .separator {
@@ -504,5 +716,39 @@
 
   .prayer-cards {
     padding: 0.25rem;
+  }
+
+  :host ::ng-deep {
+    .prayer-tabs {
+      .p-tabview-nav-container {
+        padding: 0.35rem;
+      }
+
+      .p-tabview-nav {
+        gap: 0.25rem;
+
+        li {
+          min-width: 85px;
+          
+          .p-tabview-nav-link {
+            padding: 0.5rem;
+            font-size: 0.85rem;
+            border-width: 2px;
+            
+            &:not(.p-highlight):hover {
+              background: rgba(239, 75, 0, 0.08);
+              border-color: #ef4b00;
+            }
+
+            &.p-highlight {
+              background: #ef4b00;
+              border-color: #ef4b00;
+              color: #ffffff;
+              box-shadow: 0 4px 8px rgba(239, 75, 0, 0.2);
+            }
+          }
+        }
+      }
+    }
   }
 }

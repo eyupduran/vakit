@@ -12,37 +12,32 @@
         @if (nextPrayerTime) {
           <div class="next-prayer-info">
             <div class="countdown-container">
-              <div class="next-prayer-title">
-                <i class="fas fa-clock"></i>
-                <span>{{ getNextPrayerText() }}</span>
-              </div>
-              <div class="prayer-header">
-                <div class="prayer-name">
-                  <i [class]="getPrayerIcon(nextPrayerTime.name)"></i>
-                  <h3>{{ nextPrayerTime.name }}</h3>
-                </div>
-                <span class="prayer-time">{{ nextPrayerTime.time }}</span>
+              <div class="next-prayer-title text-center">
+                <span>Vaktin çıkmasına</span>
+                <i [class]="getPrayerIcon(nextPrayerTime.name)"></i>
               </div>
               
-              <div class="progress-bar">
-                <div class="progress" [style.width.%]="nextPrayerTime.progress"></div>
-              </div>
-
               <div class="countdown">
                 <div class="time-unit">
                   <span class="value">{{nextPrayerTime.remainingTime.hours | number:'2.0-0'}}</span>
-                  <span class="label">Saat</span>
+                  <span class="label">saat</span>
                 </div>
                 <div class="separator">:</div>
                 <div class="time-unit">
                   <span class="value">{{nextPrayerTime.remainingTime.minutes | number:'2.0-0'}}</span>
-                  <span class="label">Dakika</span>
+                  <span class="label">dakika</span>
                 </div>
                 <div class="separator">:</div>
-                <div class="time-unit">
+                <div class="time-unit seconds">
                   <span class="value">{{nextPrayerTime.remainingTime.seconds | number:'2.0-0'}}</span>
-                  <span class="label">Saniye</span>
+                  <span class="label">saniye</span>
                 </div>
+              </div>
+
+              <div class="prayer-date text-center">
+                <span class="date">{{ getCurrentDate() }}</span>
+                <span class="separator">•</span>
+                <span class="hijri">{{ getHijriDate() }}</span>
               </div>
             </div>
           </div>
@@ -53,10 +48,11 @@
             @for (date of getDates(times.times); track date) {
               <p-tabPanel [header]="formatDate(date)">
                 <div class="prayer-cards">
+                  
                   <div class="prayer-card-wrapper">
                     <div class="prayer-card">
                       <div class="prayer-icon">
-                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-cloud-moon"></i> <!-- İmsak -->
                       </div>
                       <div class="prayer-info">
                         <h3>İmsak</h3>
@@ -64,11 +60,11 @@
                       </div>
                     </div>
                   </div>
-
+        
                   <div class="prayer-card-wrapper">
                     <div class="prayer-card">
                       <div class="prayer-icon">
-                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-sun"></i> <!-- Güneş -->
                       </div>
                       <div class="prayer-info">
                         <h3>Güneş</h3>
@@ -76,11 +72,11 @@
                       </div>
                     </div>
                   </div>
-
+        
                   <div class="prayer-card-wrapper">
                     <div class="prayer-card">
                       <div class="prayer-icon">
-                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-sun"></i> <!-- Öğle -->
                       </div>
                       <div class="prayer-info">
                         <h3>Öğle</h3>
@@ -88,23 +84,23 @@
                       </div>
                     </div>
                   </div>
-
+        
                   <div class="prayer-card-wrapper">
                     <div class="prayer-card">
                       <div class="prayer-icon">
-                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-cloud-sun"></i> <!-- İkindi -->
                       </div>
                       <div class="prayer-info">
-                        <h3>İkindi</h3>
+                        <h3>{{ 'İkindi'.toLocaleUpperCase('tr-TR') }}</h3>
                         <p class="time">{{ times.times[date][3] }}</p>
                       </div>
                     </div>
                   </div>
-
+        
                   <div class="prayer-card-wrapper">
                     <div class="prayer-card">
                       <div class="prayer-icon">
-                        <i class="fas fa-cloud-moon"></i>
+                        <i class="fas fa-cloud-moon"></i> <!-- Akşam -->
                       </div>
                       <div class="prayer-info">
                         <h3>Akşam</h3>
@@ -112,11 +108,11 @@
                       </div>
                     </div>
                   </div>
-
+        
                   <div class="prayer-card-wrapper">
                     <div class="prayer-card">
                       <div class="prayer-icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-moon"></i> <!-- Yatsı -->
                       </div>
                       <div class="prayer-info">
                         <h3>Yatsı</h3>
@@ -124,11 +120,14 @@
                       </div>
                     </div>
                   </div>
+        
                 </div>
               </p-tabPanel>
             }
           </p-tabView>
         </div>
+        
+        
       </ng-container>
     } @else {
       <div class="loading-container">

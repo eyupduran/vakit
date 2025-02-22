@@ -29,6 +29,13 @@
   --card-background: #1e1e1e;
 }
 
+html, body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -120,10 +127,28 @@ body.dark-theme {
   .prayer-card {
     &:hover {
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25) !important;
+
+      .prayer-icon {
+        background: linear-gradient(135deg, #ff0000, #000000) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4) !important;
+      }
     }
 
     .prayer-icon {
-      background: var(--primary-color) !important;
+      background: linear-gradient(158deg, #001eff, #1c1c1c)  !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+
+      i {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .next-prayer-info {
+    .prayer-info-row i {
+      color: #ff0000 !important;
+      filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.4)) !important;
     }
   }
 
@@ -294,4 +319,22 @@ body.dark-theme {
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .prayer-card {
+    .prayer-icon {
+      width: 32px;
+      height: 32px;
+
+      :root.dark-theme & {
+        background: linear-gradient(135deg, #ff0000, #000000) !important;
+        box-shadow: 0 4px 12px rgba(255, 0, 0, 0.25) !important;
+      }
+
+      i {
+        font-size: 1rem;
+      }
+    }
+  }
 }
